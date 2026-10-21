@@ -1,0 +1,12 @@
+{
+  "name": "veyanet",
+  "description": "VEYA plugins by veyanet",
+  "owner": { "name": "veyanet", "url": "https://github.com/veyanet" },
+  "plugins": [
+    {
+      "name": "veya",
+      "source": "./",
+      "description": "VEYA skill and hosted MCP server (51 veya_* tools) for checking, limiting, recording and proving AI agent actions on Robinhood Chain."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "veya",
+  "displayName": "VEYA",
+  "version": "1.2.8",
+  "description": "VEYA skill and hosted MCP server (51 veya_* tools): check, limit, record and prove AI agent actions on Robinhood Chain.",
+  "author": { "name": "veyanet", "url": "https://github.com/veyanet" },
+  "homepage": "https://veyanet.tech",
+  "repository": "https://github.com/veyanet/veya-skills",
+  "license": "MIT",
+  "keywords": ["mcp", "ai-agents", "verification", "onchain-proofs", "robinhood-chain"],
+  "skills": ["./"],
+  "userConfig": {
+    "veya_api_key": {
+      "type": "string",
+      "title": "VEYA API key",
+      "description": "Your VEYA product API key. Needed for scoped and write tools.",
+      "sensitive": true,
+      "required": false
+    }
+  },
+  "mcpServers": {
+    "veya": {
+      "type": "http",
+      "url": "https://mcp.veyanet.tech/mcp",
+      "headers": { "Authorization": "Bearer ${user_config.veya_api_key}" }
+    }
+  }
+}
