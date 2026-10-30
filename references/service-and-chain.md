@@ -19,8 +19,7 @@ Expected (Mainnet profile):
   "name": "@veyanet/mcp",
   "publicUrl": "https://mcp.veyanet.tech/mcp",
   "settlement": {
-    "network": "Robinhood Chain",
-    "chainId": "<network chain id>",
+    "network": "Robinhood Chain mainnet",
     "contract": "0x87dC582eEA544A434a5C1e30Ca3d12c1e548a674",
     "explorer": "https://robinhoodchain.blockscout.com",
     "rpc": "https://rpc.mainnet.chain.robinhood.com"
@@ -31,7 +30,7 @@ Expected (Mainnet profile):
 }
 ```
 
-On a Testnet host, `settlement.network` is `Robinhood Chain testnet` and `chainId` is the Testnet profile id.
+On a Testnet host, `settlement.network` is `Robinhood Chain testnet` and `settlement.contract` is the Testnet Veya.sol.
 Use `settlement.explorer` for every link you show the user.
 
 **2. Ping the chain**
@@ -40,7 +39,7 @@ Use `settlement.explorer` for every link you show the user.
 { "tool": "veya_ping_chain", "arguments": {} }
 ```
 
-Check that `chainId` equals `expectedChainId` and a recent block number is present.
+Check that `blockNumber` is a recent block and `config.contractAddress` matches `settlement.contract`.
 If the ping fails, verify and write tools will fail too; report an RPC problem.
 
 **3. Check the product API and fleet**
@@ -67,7 +66,7 @@ Returns `userPaidWrites: true`, what a write `requires`, the `gasPayer` sentence
 | Method | Path | Purpose |
 |---|---|---|
 | `GET` | `https://mcp.veyanet.tech/` | Landing page with the paste URL |
-| `GET` | `https://mcp.veyanet.tech/health` | `status`, `service`, `version`, `network`, `chainId`, `contractAddress`, `writesEnabled`, `sealed`, `settlement` |
+| `GET` | `https://mcp.veyanet.tech/health` | `status`, `service`, `version`, `publicMcpUrl`, `network`, `contractAddress`, `writesEnabled`, `operatorRelayerWrites`, `sealed`, `paidCallGuard`, `settlement` |
 | `POST` | `https://mcp.veyanet.tech/mcp` | Stateless Streamable HTTP MCP |
 | `POST` | `https://mcp.veyanet.tech/mcp/session` | Optional session path (`MCP-Session-Id`, 30 min idle) |
 
@@ -78,16 +77,16 @@ Returns `userPaidWrites: true`, what a write `requires`, the `gasPayer` sentence
 Service info: AES-256-GCM sealed execution and the selected settlement profile
 
 - **Access:** Public
-- **Returns:** `name`, `version`, `publicUrl`, `settlement` {`network`,`chainId`,`contract`,`explorer`,`rpc`}, `productApi`, `sealed`, `mainnet`, `writes`, `toolSurface`, `fleet`, `publicPasteUrl`
+- **Returns:** `name`, `version`, `publicUrl`, `settlement` {`network`,`contract`,`explorer`,`rpc`}, `productApi`, `sealed`, `mainnet`, `writes`, `toolSurface`, `fleet`, `publicPasteUrl`, `paidCallGuard` (when the Metered Call Guard is on)
 
 _No arguments._
 
 ### `veya_ping_chain`
 
-Ping Robinhood Chain RPC — chain id, block, contract
+Ping Robinhood Chain RPC — block, contract
 
 - **Access:** Public
-- **Returns:** Ping fields from `VeyaClient.pingChain()`, `chainId` (string), `expectedChainId`, `config`
+- **Returns:** `blockNumber` and `config` {`network`,`rpcUrl`,`contractAddress`,`explorerUrl`,`payerConfigured`,`requestTimeoutMs`,`validators`,`sealedNodeConfigured`}
 
 _No arguments._
 
@@ -102,7 +101,7 @@ _No arguments._
 
 ### `veya_writes_status`
 
-Reports how on-chain writes work on this server: your own wallet sends them, the host relayer does not
+Reports how on-chain writes work on this server: your own wallet sends them, the host signer does not
 
 - **Access:** Public
 - **Returns:** `userPaidWrites`, `operatorRelayerWrites`, `requires` {`apiKey`,`payerPrivateKey`}, `gasPayer`, `emptyWallet`, `faucetUrl` (Testnet)
