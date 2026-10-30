@@ -91,10 +91,10 @@ npx -y @veyanet/mcp          # Streamable HTTP on PORT (default <mcp-port>)
 | `VEYA_PAYER_PRIVATE_KEY` | Wallet for product write tools on this host | unset |
 | `MCP_API_KEY` | Require `Authorization: Bearer <key>` on `/mcp` | unset |
 | `VEYA_CAPACITY_PER_MINUTE` | Per-key limit for consensus/sealed/seal-decision | `30` |
-| `VEYA_SEAL_DECISION_RELAYER` | `1` lets the host relayer pay for `veya_seal_decision` | off |
+| `VEYA_SEAL_DECISION_RELAYER` | `1` lets the host signer pay for `veya_seal_decision` | off |
 | `VEYA_SEAL_DECISION_ENVIRONMENT_ID` | Environment for `veya_seal_decision` receipts, registered on the active network (needed on mainnet unless each call passes `environmentId`) | unset |
-| `VEYA_SEAL_DECISION_DAILY_CAP` | Relayer seals per key per UTC day | `20` |
-| `VEYA_SEAL_DECISION_GLOBAL_DAILY_CAP` | Relayer seals per host per UTC day | `100` |
+| `VEYA_SEAL_DECISION_DAILY_CAP` | Host-signer seals per key per UTC day | `20` |
+| `VEYA_SEAL_DECISION_GLOBAL_DAILY_CAP` | Host-signer seals per host per UTC day | `100` |
 | `CORS_ORIGIN` | Browser Origin allowlist | empty |
 
 Full operator docs: https://github.com/veyanet/veya-mcp/tree/main/docs
