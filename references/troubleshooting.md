@@ -17,8 +17,8 @@ Every message below is returned by the server code. Match the text, then apply t
 | Message | Fix |
 |---|---|
 | `API key limit: 30 requests per minute` | Wait until the next minute, then retry once |
-| `Daily seal limit: 20 relayer sends for this API key` | Pass the user's funded wallet, or wait until 00:00 UTC |
-| `Daily seal limit: 100 relayer sends for this host` | Same as above |
+| `Daily seal limit: 20 host-signer sends for this API key` | Pass the user's funded wallet, or wait until 00:00 UTC |
+| `Daily seal limit: 100 host-signer sends for this host` | Same as above |
 | HTTP 429 | Over 120 `/mcp` requests per minute from one IP; slow down |
 
 ## Wallet and writes
@@ -41,7 +41,7 @@ Every message below is returned by the server code. Match the text, then apply t
 |---|---|
 | `Pass exactly one of text, json, or txHash.` | `veya_prove` takes one source |
 | `json must be a JSON value.` | Pass valid JSON as a string |
-| `SEAL_ENVIRONMENT_REQUIRED: on mainnet, pass environmentId…` | Create and register an environment on Robinhood Chain (`veya_create_environment` → `veya_register_environment`) and pass its id as `environmentId` |
+| `refusal: "SEAL_ENVIRONMENT_REQUIRED"` | Create and register an environment on Robinhood Chain (`veya_create_environment` → `veya_register_environment`) and pass its id as `environmentId` |
 | `Do not use names like "…" (test/demo/tmp/sandbox)` (`CONFLICT`, 409) | Rename the environment, e.g. `VEYA Treasury Ops` |
 | `No VEYA proof found in this transaction` (`NOT_VEYA_TX`, 404) | That tx is not a commitment. Use `veya_verify_transaction` for registration txs |
 | `decision must be a JSON object.` | `veya_seal_decision.decision` must parse to an object, e.g. `"{\"action\":\"approve\"}"` |
