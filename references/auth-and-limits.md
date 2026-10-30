@@ -31,13 +31,13 @@ Missing or wrong → HTTP 401 `{ "error": "unauthorized" }`.
 |---|---|---|
 | `/mcp` requests per client IP | 120 per minute | HTTP 429 |
 | `veya_run_consensus`, `veya_client_run_consensus`, `veya_sealed_execute`, `veya_seal_decision` per API key | 30 per minute | `API key limit: 30 requests per minute` |
-| host-sent `veya_seal_decision` per API key | 20 per UTC day | `Daily seal limit: 20 relayer sends for this API key` |
-| host-sent `veya_seal_decision` per host | 100 per UTC day | `Daily seal limit: 100 relayer sends for this host` |
+| host-sent `veya_seal_decision` per API key | 20 per UTC day | `Daily seal limit: 20 host-signer sends for this API key` |
+| host-sent `veya_seal_decision` per host | 100 per UTC day | `Daily seal limit: 100 host-signer sends for this host` |
 | Optional MCP sessions (`/mcp/session`) | 30 min idle, 1000 open | – |
 | Product API call timeout | 20 s (`veya_api_health` 8 s) | `timeout` |
 
 Per-minute windows reset each clock minute. Daily caps reset at 00:00 UTC (05:30 IST).
-A relayer seal counts only when it succeeds.
+A host signer seal counts only when it succeeds.
 
 ## Agent rules
 
