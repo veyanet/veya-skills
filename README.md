@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-SKILL.md-8b5cf6.svg?style=flat-edge)](https://agentskills.io)
 [![MCP Endpoint](https://img.shields.io/badge/MCP-mcp.veyanet.tech-0ea5e9.svg?style=flat-edge)](https://mcp.veyanet.tech/mcp)
-[![Tools](https://img.shields.io/badge/tools-51-22c55e.svg?style=flat-edge)](references/tools.md)
+[![Tools](https://img.shields.io/badge/tools-54-22c55e.svg?style=flat-edge)](references/tools.md)
 [![Network](https://img.shields.io/badge/Robinhood%20Chain-Mainnet-111827.svg?style=flat-edge)](https://robinhoodchain.blockscout.com/address/0x87dC582eEA544A434a5C1e30Ca3d12c1e548a674)
 
 **[Website](https://veyanet.tech)** • **[Docs](https://veyanet.tech/docs)** • **[App](https://app.veyanet.tech)** • **[X](https://x.com/withveya)** • **[MCP server](https://github.com/veyanet/veya-mcp)** • **[SDK](https://github.com/veyanet/veya-sdk)** • **[Tool reference](references/tools.md)**
@@ -34,7 +34,7 @@ provable:
 
 ### Why a skill?
 
-The VEYA MCP server exposes 51 tools. This skill teaches an agent **when** to use each one,
+The VEYA MCP server exposes 54 tools. This skill teaches an agent **when** to use each one,
 **which arguments** it needs, and **how** to chain them into complete workflows: prove, verify,
 attest, route and audit. The result is correct calls on the first try, clear explanations to the
 user, and safe defaults (read-only first, explicit confirmation before wallet writes).
@@ -149,7 +149,8 @@ Ready files: [`assets/mcp.json`](assets/mcp.json) (hosted) and
 | Agent memory | 4 | Key | [memory.md](references/memory.md) |
 | Public registry | 6 | Public | [registry.md](references/registry.md) |
 | On-chain writes | 5 | Key + wallet | [onchain-writes.md](references/onchain-writes.md) |
-| **Total** | **51** | | [tools.md](references/tools.md) |
+| Metered Call Guard (x402 resource calls) | 3 | Key + wallets | [call-guard.md](references/call-guard.md) |
+| **Total** | **54** | | [tools.md](references/tools.md) |
 
 ## Network
 
@@ -176,8 +177,8 @@ Create a key at [app.veyanet.tech](https://app.veyanet.tech): connect your walle
 |---|---|
 | `/mcp` requests per IP | 120 / minute |
 | Consensus, sealed execution, `veya_seal_decision` per key | 30 / minute |
-| host-sent seals per key | 20 / UTC day |
-| host-sent seals per host | 100 / UTC day |
+| Host-sent seals per key | 20 / UTC day |
+| Host-sent seals per host | 100 / UTC day |
 
 More: [references/auth-and-limits.md](references/auth-and-limits.md).
 
@@ -199,7 +200,8 @@ veya-skills/
 │   ├── memory.md                   # agent memory
 │   ├── registry.md                 # public agents, certificates, executions
 │   ├── onchain-writes.md           # Veya.sol writes, pre-flight, funding
-│   ├── tools.md                    # all 51 tools: args, types, returns, examples
+│   ├── call-guard.md               # x402 resource calls: discover, call, runs
+│   ├── tools.md                    # all 54 tools: args, types, returns, examples
 │   ├── troubleshooting.md          # every server error message and its fix
 │   └── sdk.md                      # @veyanet/sdk for custom logic
 ├── assets/
