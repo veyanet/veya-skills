@@ -1,8 +1,8 @@
 {
   "name": "veya",
   "displayName": "VEYA",
-  "version": "1.2.8",
-  "description": "VEYA skill and hosted MCP server (51 veya_* tools): check, limit, record and prove AI agent actions on Robinhood Chain.",
+  "version": "1.2.11",
+  "description": "VEYA skill and hosted MCP server (54 veya_* tools): check, limit, record and prove AI agent actions on Robinhood Chain.",
   "author": { "name": "veyanet", "url": "https://github.com/veyanet" },
   "homepage": "https://veyanet.tech",
   "repository": "https://github.com/veyanet/veya-skills",
