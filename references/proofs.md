@@ -92,7 +92,7 @@ The decision runs in the AES-256-GCM sealed runtime and is signed by a 2-of-3 ML
 Result: `ok`, `evidenceId`, `sealed` (fingerprint, `runtime: "AES-256-GCM"`), `attestation`, `chain`.
 
 - `chain` holds the `attestExecution` receipt when `payerPrivateKey` is passed, or when the
-  host turns on the seal-decision relayer (`VEYA_SEAL_DECISION_RELAYER=1`). Otherwise `chain` is `null`.
+  host turns on the seal-decision host-signer switch (`VEYA_SEAL_DECISION_RELAYER=1`). Otherwise `chain` is `null`.
 - Limits: 30 calls per minute per key; host-sent seals 20 per key and 100 per host per UTC day.
 - Sealed node offline: `code: "SEALED_UNREACHABLE"`, `transaction: null`; nothing is sent.
 
@@ -103,7 +103,7 @@ Result: `ok`, `evidenceId`, `sealed` (fingerprint, `runtime: "AES-256-GCM"`), `a
 Prove text, canonical JSON, or a receipt hash. Anchor writes only when a product API key and a payer key are passed.
 
 - **Access:** Public · anchor: API key + wallet
-- **Returns:** `ok`, `mode` (`digest`/`verified`/`anchored`/`refused`), `inputKind`, `digestHex`, `anchored`, `chainId`, `contractAddress`, `txHash`, `explorerUrl`, `event`, `blockNumber`, `refusal`
+- **Returns:** `ok`, `mode` (`digest`/`verified`/`anchored`/`refused`), `inputKind`, `digestHex`, `anchored`, `network`, `contractAddress`, `txHash`, `explorerUrl`, `event`, `blockNumber`, `refusal`
 - **Notes:** Pass exactly one of `text`, `json`, `txHash`. With `anchor: true` also pass `apiKey`, `environmentId` (an environment already on Veya.sol; UUID or 32-hex) and the funded wallet. Same JSON object with keys in another order hashes the same. Text `hello` → digest `ea8f163db38682925e4491c5e58d4bb3506ef8c14eb78a86e908c5624a67200f`.
 
 | Arg | Type | Required | Notes |
@@ -129,9 +129,9 @@ Compute BLAKE3 hex digest (commitment helper)
 
 ### `veya_seal_decision`
 
-Seal an evidence id and a decision. attestExecution is sent only when a payer key is passed, or when this host's seal-decision relayer switch is on. On Mainnet pass environmentId or set VEYA_SEAL_DECISION_ENVIRONMENT_ID. Without either, the result is SEAL_ENVIRONMENT_REQUIRED and nothing is sent.
+Seal an evidence id and a decision. attestExecution is sent only when a payer key is passed, or when this host's seal-decision host-signer switch is on. On Mainnet pass environmentId or set VEYA_SEAL_DECISION_ENVIRONMENT_ID. Without either, the result is SEAL_ENVIRONMENT_REQUIRED and nothing is sent.
 
-- **Access:** API key · wallet or host relayer
+- **Access:** API key · wallet or host signer
 - **Returns:** `ok`, `evidenceId`, `sealed`, `attestation`, `chain` (receipt or null). Sealed node offline: `code` `SEALED_UNREACHABLE`, `transaction` null
 - **Notes:** `decision` is a string that parses to a JSON object. The receipt is written when `payerPrivateKey` is passed, or when the host enables `VEYA_SEAL_DECISION_RELAYER` (then 20 per key and 100 per host per UTC day). Otherwise `chain` is null. **Mainnet:** pass `environmentId` of an environment registered on Robinhood Chain (`veya_create_environment` → `veya_register_environment`), unless the host sets `VEYA_SEAL_DECISION_ENVIRONMENT_ID`. Without one the call returns `SEAL_ENVIRONMENT_REQUIRED` and nothing is sent.
 
@@ -145,7 +145,7 @@ Seal an evidence id and a decision. attestExecution is sent only when a payer ke
 
 ### `veya_anchor_proof`
 
-Anchor a content proof on Veya.sol from YOUR wallet (apiKey + payerPrivateKey). Does not use the hosted relayer.
+Anchor a content proof on Veya.sol from YOUR wallet (apiKey + payerPrivateKey). Does not use the hosted signer.
 
 - **Access:** API key + wallet
 - **Returns:** `{ txHash, explorer, from, hash, label, recorded }` (plus `recordError` if the proof list could not save it)
