@@ -1,14 +1,14 @@
 ---
 name: veya
-description: Operate VEYA, the post-quantum execution and proof layer for AI agents on Robinhood Chain, through the hosted VEYA MCP server (51 veya_* tools). Prove and anchor content as BLAKE3 commitments on Veya.sol, verify transactions and commitments, create ML-DSA-44 identities and signatures, manage environments, agents, tool policy and Kyber-768 secure routing, run 2-of-3 consensus and AES-256-GCM sealed execution, store agent memory, browse the public registry, and send on-chain writes from your own wallet. Use when the user mentions VEYA, veyanet, Veya.sol, Robinhood Chain, on-chain proof or attestation of agent work, BLAKE3 commitments, ML-DSA, Kyber, post-quantum signatures, sealed or protected execution, agent consensus, or any veya_ tool.
+description: Operate VEYA, the post-quantum execution and proof layer for AI agents on Robinhood Chain, through the hosted VEYA MCP server (54 veya_* tools). Prove and anchor content as BLAKE3 commitments on Veya.sol, verify transactions and commitments, create ML-DSA-44 identities and signatures, manage environments, agents, tool policy and Kyber-768 secure routing, run 2-of-3 consensus and AES-256-GCM sealed execution, store agent memory, browse the public registry, and send on-chain writes from your own wallet. Use when the user mentions VEYA, veyanet, Veya.sol, Robinhood Chain, on-chain proof or attestation of agent work, BLAKE3 commitments, ML-DSA, Kyber, post-quantum signatures, sealed or protected execution, agent consensus, or any veya_ tool.
 license: MIT
 compatibility: Requires the VEYA MCP server at https://mcp.veyanet.tech/mcp (Streamable HTTP) and network access. Scoped and write tools need a VEYA product API key.
 metadata:
   author: veyanet
   homepage: https://veyanet.tech
   mcp-url: https://mcp.veyanet.tech/mcp
-  tools: "51"
-  version: "1.2.8"
+  tools: "54"
+  version: "1.2.11"
 ---
 
 # VEYA
@@ -40,7 +40,7 @@ environment → agent (+ allowedTools) → consensus / sealed execution
 - **Public** (no key): describe, ping, health, hashing, `veya_prove` without anchor, all verify and on-chain reads, `veya_pq_*`, public registry.
 - **API key**: pass the user's product key (`veya_dev_…` / `veya_live_…`) as the `apiKey` argument. Get one at https://app.veyanet.tech (connect wallet → System → API Keys). Needed for environments, agents, policy, routing, memory, consensus, sealed execution, `veya_seal_decision`.
 - **API key + wallet**: on-chain writes also need the funded wallet bound to that key (`payerPrivateKey`). Gas is ETH on the selected network.
-- **Limits**: consensus, sealed execution and `veya_seal_decision` allow 30 calls/min per key. host-sent seals: 20 per key and 100 per host per UTC day. `/mcp`: 120 requests/min per IP.
+- **Limits**: consensus, sealed execution and `veya_seal_decision` allow 30 calls/min per key. Host-sent seals: 20 per key and 100 per host per UTC day. `/mcp`: 120 requests/min per IP.
 
 Details: [references/auth-and-limits.md](references/auth-and-limits.md).
 
@@ -61,6 +61,7 @@ Details: [references/auth-and-limits.md](references/auth-and-limits.md).
 | Agent memory | `veya_store_memory`, `veya_read_memory`, `veya_invalidate_memory` | [memory](references/memory.md) |
 | Browse public agents/certificates | `veya_public_*` | [registry](references/registry.md) |
 | Write commitments / attestations | `veya_store_commitment`, `veya_attest_execution`, `veya_register_environment` | [onchain-writes](references/onchain-writes.md) |
+| Call an allowed x402 resource with a policy check and on-chain record | `veya_paid_discover`, `veya_paid_call`, `veya_paid_run` | [call-guard](references/call-guard.md) |
 | Exact args of any tool | – | [tools](references/tools.md) |
 
 ## Workflow 1: prove content (no key)
