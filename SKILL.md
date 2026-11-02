@@ -1,14 +1,14 @@
 ---
 name: veya
-description: Operate VEYA, the post-quantum execution and proof layer for AI agents on Robinhood Chain, through the hosted VEYA MCP server (54 veya_* tools). Prove and anchor content as BLAKE3 commitments on Veya.sol, verify transactions and commitments, create ML-DSA-44 identities and signatures, manage environments, agents, tool policy and Kyber-768 secure routing, run 2-of-3 consensus and AES-256-GCM sealed execution, store agent memory, browse the public registry, and send on-chain writes from your own wallet. Use when the user mentions VEYA, veyanet, Veya.sol, Robinhood Chain, on-chain proof or attestation of agent work, BLAKE3 commitments, ML-DSA, Kyber, post-quantum signatures, sealed or protected execution, agent consensus, or any veya_ tool.
+description: Operate VEYA, the post-quantum execution and proof layer for AI agents on Robinhood Chain, through the hosted VEYA MCP server (55 veya_* tools with Metered Call Guard on; 52 without). Prove and anchor content as BLAKE3 commitments on Veya.sol, verify transactions and commitments, create ML-DSA-44 identities and signatures, manage environments, agents, tool policy and Kyber-768 secure routing, run 2-of-3 consensus and AES-256-GCM sealed execution, store agent memory, browse the public registry, and send on-chain writes from your own wallet. Use when the user mentions VEYA, veyanet, Veya.sol, Robinhood Chain, on-chain proof or attestation of agent work, BLAKE3 commitments, ML-DSA, Kyber, post-quantum signatures, sealed or protected execution, agent consensus, or any veya_ tool.
 license: MIT
 compatibility: Requires the VEYA MCP server at https://mcp.veyanet.tech/mcp (Streamable HTTP) and network access. Scoped and write tools need a VEYA product API key.
 metadata:
   author: veyanet
   homepage: https://veyanet.tech
   mcp-url: https://mcp.veyanet.tech/mcp
-  tools: "54"
-  version: "1.2.11"
+  tools: "55"
+  version: "1.2.13"
 ---
 
 # VEYA
@@ -38,7 +38,7 @@ environment → agent (+ allowedTools) → consensus / sealed execution
 ## Access
 
 - **Public** (no key): describe, ping, health, hashing, `veya_prove` without anchor, all verify and on-chain reads, `veya_pq_*`, public registry.
-- **API key**: pass the user's product key (`veya_dev_…` / `veya_live_…`) as the `apiKey` argument. Get one at https://app.veyanet.tech (connect wallet → System → API Keys). Needed for environments, agents, policy, routing, memory, consensus, sealed execution, `veya_seal_decision`.
+- **API key**: pass the user's product key (`veya_dev_…` / `veya_live_…`) as the `apiKey` argument. Get one at https://app.veyanet.tech (connect wallet → System → API Keys). Needed for environments, agents, policy, routing, memory, consensus, sealed execution, `veya_seal_decision`, and your `veya_tier` details.
 - **API key + wallet**: on-chain writes also need the funded wallet bound to that key (`payerPrivateKey`). Gas is ETH on the selected network.
 - **Limits**: consensus, sealed execution and `veya_seal_decision` allow 30 calls/min per key. Host-sent seals: 20 per key and 100 per host per UTC day. `/mcp`: 120 requests/min per IP.
 
@@ -56,6 +56,7 @@ Details: [references/auth-and-limits.md](references/auth-and-limits.md).
 | Seal a decision | `veya_seal_decision { evidenceId, decision, apiKey, environmentId }` (mainnet: a registered environment) | [proofs](references/proofs.md) |
 | PQ keys, sign, verify | `veya_pq_keygen` → `veya_pq_sign` → `veya_pq_verify` | [identity](references/identity.md) |
 | Create a workspace and agent | `veya_create_environment` → `veya_deploy_agent` | [workspaces](references/workspaces.md) |
+| Check $VEYA holder tier / limits | `veya_tier` (public table without key; your tier with `apiKey`) | [workspaces](references/workspaces.md) |
 | Allow/deny tools, route messages | `veya_set_tool_policy`, `veya_route_message`, `veya_route_secure_message` | [policy-and-routing](references/policy-and-routing.md) |
 | Quorum or sealed run | `veya_run_consensus`, `veya_sealed_execute`, `veya_run_protected_execution` | [execution](references/execution.md) |
 | Agent memory | `veya_store_memory`, `veya_read_memory`, `veya_invalidate_memory` | [memory](references/memory.md) |
