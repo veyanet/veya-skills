@@ -1,4 +1,4 @@
-# Tool reference — all 54 VEYA MCP tools
+# Tool reference — all 55 VEYA MCP tools (52 without Metered Call Guard)
 
 Generated from the tool registrations in `veya-mcp/src/tools/*.ts`. Names, argument names, types and required flags match the server code.
 
@@ -33,39 +33,40 @@ Generated from the tool registrations in `veya-mcp/src/tools/*.ts`. Names, argum
 | 19 | [`veya_pq_fingerprint`](#veya_pq_fingerprint) | [Post-quantum identity](identity.md) | Public |
 | 20 | [`veya_guest_login`](#veya_guest_login) | [Accounts, environments, agents](workspaces.md) | Public |
 | 21 | [`veya_account`](#veya_account) | [Accounts, environments, agents](workspaces.md) | API key |
-| 22 | [`veya_list_environments`](#veya_list_environments) | [Accounts, environments, agents](workspaces.md) | API key (guest: listing) |
-| 23 | [`veya_get_environment`](#veya_get_environment) | [Accounts, environments, agents](workspaces.md) | API key (guest: listing) |
-| 24 | [`veya_create_environment`](#veya_create_environment) | [Accounts, environments, agents](workspaces.md) | API key |
-| 25 | [`veya_list_agents`](#veya_list_agents) | [Accounts, environments, agents](workspaces.md) | API key (guest: listing) |
-| 26 | [`veya_deploy_agent`](#veya_deploy_agent) | [Accounts, environments, agents](workspaces.md) | API key |
-| 27 | [`veya_set_tool_policy`](#veya_set_tool_policy) | [Policy and routing](policy-and-routing.md) | API key (owner) |
-| 28 | [`veya_route_message`](#veya_route_message) | [Policy and routing](policy-and-routing.md) | API key (owner) |
-| 29 | [`veya_route_secure_message`](#veya_route_secure_message) | [Policy and routing](policy-and-routing.md) | API key (owner) |
-| 30 | [`veya_verify_secure_message`](#veya_verify_secure_message) | [Policy and routing](policy-and-routing.md) | Public |
-| 31 | [`veya_boundnet_invoke`](#veya_boundnet_invoke) | [Policy and routing](policy-and-routing.md) | API key |
-| 32 | [`veya_run_consensus`](#veya_run_consensus) | [Execution](execution.md) | API key · 30/min per key |
-| 33 | [`veya_client_run_consensus`](#veya_client_run_consensus) | [Execution](execution.md) | API key · 30/min per key |
-| 34 | [`veya_sealed_execute`](#veya_sealed_execute) | [Execution](execution.md) | API key · 30/min per key |
-| 35 | [`veya_run_protected_execution`](#veya_run_protected_execution) | [Execution](execution.md) | API key |
-| 36 | [`veya_list_executions`](#veya_list_executions) | [Execution](execution.md) | API key (guest: listing) |
-| 37 | [`veya_store_memory`](#veya_store_memory) | [Memory](memory.md) | API key (owner) |
-| 38 | [`veya_read_memory`](#veya_read_memory) | [Memory](memory.md) | API key (owner) |
-| 39 | [`veya_invalidate_memory`](#veya_invalidate_memory) | [Memory](memory.md) | API key (owner) |
-| 40 | [`veya_list_api_memory`](#veya_list_api_memory) | [Memory](memory.md) | API key (guest: listing) |
-| 41 | [`veya_public_stats`](#veya_public_stats) | [Public registry](registry.md) | Public |
-| 42 | [`veya_public_list_agents`](#veya_public_list_agents) | [Public registry](registry.md) | Public |
-| 43 | [`veya_public_get_agent`](#veya_public_get_agent) | [Public registry](registry.md) | Public |
-| 44 | [`veya_public_list_certificates`](#veya_public_list_certificates) | [Public registry](registry.md) | Public |
-| 45 | [`veya_public_get_certificate`](#veya_public_get_certificate) | [Public registry](registry.md) | Public |
-| 46 | [`veya_public_get_execution`](#veya_public_get_execution) | [Public registry](registry.md) | Public |
-| 47 | [`veya_store_commitment`](#veya_store_commitment) | [On-chain writes](onchain-writes.md) | API key + wallet |
-| 48 | [`veya_attest_execution`](#veya_attest_execution) | [On-chain writes](onchain-writes.md) | API key + wallet |
-| 49 | [`veya_register_environment`](#veya_register_environment) | [On-chain writes](onchain-writes.md) | API key + wallet |
-| 50 | [`veya_register_pq_onchain`](#veya_register_pq_onchain) | [On-chain writes](onchain-writes.md) | API key + wallet |
-| 51 | [`veya_anchor_pq_attestation`](#veya_anchor_pq_attestation) | [On-chain writes](onchain-writes.md) | API key + wallet |
-| 52 | [`veya_paid_discover`](#veya_paid_discover) | [Metered Call Guard](call-guard.md) | Public |
-| 53 | [`veya_paid_call`](#veya_paid_call) | [Metered Call Guard](call-guard.md) | API key + your wallets |
-| 54 | [`veya_paid_run`](#veya_paid_run) | [Metered Call Guard](call-guard.md) | API key |
+| 22 | [`veya_tier`](#veya_tier) | [Accounts, environments, agents](workspaces.md) | Public table · API key for your tier |
+| 23 | [`veya_list_environments`](#veya_list_environments) | [Accounts, environments, agents](workspaces.md) | API key (guest: listing) |
+| 24 | [`veya_get_environment`](#veya_get_environment) | [Accounts, environments, agents](workspaces.md) | API key (guest: listing) |
+| 25 | [`veya_create_environment`](#veya_create_environment) | [Accounts, environments, agents](workspaces.md) | API key |
+| 26 | [`veya_list_agents`](#veya_list_agents) | [Accounts, environments, agents](workspaces.md) | API key (guest: listing) |
+| 27 | [`veya_deploy_agent`](#veya_deploy_agent) | [Accounts, environments, agents](workspaces.md) | API key |
+| 28 | [`veya_set_tool_policy`](#veya_set_tool_policy) | [Policy and routing](policy-and-routing.md) | API key (owner) |
+| 29 | [`veya_route_message`](#veya_route_message) | [Policy and routing](policy-and-routing.md) | API key (owner) |
+| 30 | [`veya_route_secure_message`](#veya_route_secure_message) | [Policy and routing](policy-and-routing.md) | API key (owner) |
+| 31 | [`veya_verify_secure_message`](#veya_verify_secure_message) | [Policy and routing](policy-and-routing.md) | Public |
+| 32 | [`veya_boundnet_invoke`](#veya_boundnet_invoke) | [Policy and routing](policy-and-routing.md) | API key |
+| 33 | [`veya_run_consensus`](#veya_run_consensus) | [Execution](execution.md) | API key · 30/min per key |
+| 34 | [`veya_client_run_consensus`](#veya_client_run_consensus) | [Execution](execution.md) | API key · 30/min per key |
+| 35 | [`veya_sealed_execute`](#veya_sealed_execute) | [Execution](execution.md) | API key · 30/min per key |
+| 36 | [`veya_run_protected_execution`](#veya_run_protected_execution) | [Execution](execution.md) | API key |
+| 37 | [`veya_list_executions`](#veya_list_executions) | [Execution](execution.md) | API key (guest: listing) |
+| 38 | [`veya_store_memory`](#veya_store_memory) | [Memory](memory.md) | API key (owner) |
+| 39 | [`veya_read_memory`](#veya_read_memory) | [Memory](memory.md) | API key (owner) |
+| 40 | [`veya_invalidate_memory`](#veya_invalidate_memory) | [Memory](memory.md) | API key (owner) |
+| 41 | [`veya_list_api_memory`](#veya_list_api_memory) | [Memory](memory.md) | API key (guest: listing) |
+| 42 | [`veya_public_stats`](#veya_public_stats) | [Public registry](registry.md) | Public |
+| 43 | [`veya_public_list_agents`](#veya_public_list_agents) | [Public registry](registry.md) | Public |
+| 44 | [`veya_public_get_agent`](#veya_public_get_agent) | [Public registry](registry.md) | Public |
+| 45 | [`veya_public_list_certificates`](#veya_public_list_certificates) | [Public registry](registry.md) | Public |
+| 46 | [`veya_public_get_certificate`](#veya_public_get_certificate) | [Public registry](registry.md) | Public |
+| 47 | [`veya_public_get_execution`](#veya_public_get_execution) | [Public registry](registry.md) | Public |
+| 48 | [`veya_store_commitment`](#veya_store_commitment) | [On-chain writes](onchain-writes.md) | API key + wallet |
+| 49 | [`veya_attest_execution`](#veya_attest_execution) | [On-chain writes](onchain-writes.md) | API key + wallet |
+| 50 | [`veya_register_environment`](#veya_register_environment) | [On-chain writes](onchain-writes.md) | API key + wallet |
+| 51 | [`veya_register_pq_onchain`](#veya_register_pq_onchain) | [On-chain writes](onchain-writes.md) | API key + wallet |
+| 52 | [`veya_anchor_pq_attestation`](#veya_anchor_pq_attestation) | [On-chain writes](onchain-writes.md) | API key + wallet |
+| 53 | [`veya_paid_discover`](#veya_paid_discover) | [Metered Call Guard](call-guard.md) | Public |
+| 54 | [`veya_paid_call`](#veya_paid_call) | [Metered Call Guard](call-guard.md) | API key + your wallets |
+| 55 | [`veya_paid_run`](#veya_paid_run) | [Metered Call Guard](call-guard.md) | API key |
 
 ## Service and chain
 
@@ -432,6 +433,28 @@ Return the wallet bound to a product API key
 
 ```json
 {"tool": "veya_account", "arguments": {"apiKey": "veya_live_…"}}
+```
+
+### `veya_tier`
+
+Your $VEYA account tier and the limits it sets on the product API. Without a key: `GET /public/holder-tiers` (the tier table). With `apiKey` or a session token: `GET /v1/holder/tier` (your tier, summed balance, counted wallets, limits, today's use).
+
+- **Access:** Public (table) · API key (your tier)
+- **Use when:** Show the public tier table, or the caller's tier / daily limits / rate limits.
+- **Returns:** Tier table, or `{ httpStatus, body }` with `tier`, `balance`, `source`, `wallets`, `limits`, `today`, `nextTier`
+- **Notes:** The API sums $VEYA on the sign-in wallet plus up to 3 linked wallets on Robinhood Chain mainnet. Over daily limits → HTTP 429 `DAILY_LIMIT`. Over per-minute key rate → HTTP 429 `RATE_LIMIT`. Matches `@veyanet/mcp` 1.2.13.
+
+| Arg | Type | Required | Notes |
+|---|---|---|---|
+| `apiKey` | string | no | product key for your tier; omit for public table |
+| `sessionToken` | string | no | guest/session token alternative |
+
+```json
+{"tool": "veya_tier", "arguments": {}}
+```
+
+```json
+{"tool": "veya_tier", "arguments": {"apiKey": "veya_live_…"}}
 ```
 
 ### `veya_list_environments`
@@ -1028,7 +1051,7 @@ Link PQ identity hash to execution hash on Veya.sol from YOUR wallet
 
 ## Metered Call Guard
 
-Workflow guide: [call-guard.md](call-guard.md). These three tools are listed when the server runs with the Metered Call Guard on; the hosted server has it on.
+Workflow guide: [call-guard.md](call-guard.md). These three tools are listed when the server runs with the Metered Call Guard on; the hosted server has it on. With Guard on, the full catalog is **55** tools (52 without).
 
 ### `veya_paid_discover`
 
