@@ -10,6 +10,7 @@ An **environment** is a scoped workspace (a "room"). **Agents** live inside it a
 |---|---|---|
 | List showcase environments, agents, proofs | yes | yes |
 | `veya_account` | – | yes |
+| `veya_tier` (your tier) | – | yes (public table: no key) |
 | Create environment | – | yes |
 | Deploy agent, protected execution, Boundnet | – | yes |
 | On-chain writes | – | yes, plus the wallet bound to the key |
@@ -84,6 +85,18 @@ Return the wallet bound to a product API key
 |---|---|---|---|
 | `apiKey` | string | yes (or `sessionToken` for listing) | product key `veya_dev_…` / `veya_live_…` |
 | `sessionToken` | string | no | guest JWT, listing only |
+
+### `veya_tier`
+
+Your $VEYA holder tier and product API limits. Without a key returns the public tier table (`GET /public/holder-tiers`). With `apiKey` returns your tier, summed balance, limits and today's use (`GET /v1/holder/tier`).
+
+- **Access:** Public (table) · API key (your tier)
+- **Returns:** Tier table, or `{ httpStatus, body }` with `tier`, `balance`, `limits`, `today`
+
+| Arg | Type | Required | Notes |
+|---|---|---|---|
+| `apiKey` | string | no | omit for public table |
+| `sessionToken` | string | no | guest/session alternative |
 
 ### `veya_list_environments`
 
