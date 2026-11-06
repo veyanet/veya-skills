@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-SKILL.md-8b5cf6.svg?style=flat-edge)](https://agentskills.io)
 [![MCP Endpoint](https://img.shields.io/badge/MCP-mcp.veyanet.tech-0ea5e9.svg?style=flat-edge)](https://mcp.veyanet.tech/mcp)
-[![Tools](https://img.shields.io/badge/tools-54-22c55e.svg?style=flat-edge)](references/tools.md)
+[![Tools](https://img.shields.io/badge/tools-55-22c55e.svg?style=flat-edge)](references/tools.md)
 [![Network](https://img.shields.io/badge/Robinhood%20Chain-Mainnet-111827.svg?style=flat-edge)](https://robinhoodchain.blockscout.com/address/0x87dC582eEA544A434a5C1e30Ca3d12c1e548a674)
 
 **[Website](https://veyanet.tech)** • **[Docs](https://veyanet.tech/docs)** • **[App](https://app.veyanet.tech)** • **[X](https://x.com/withveya)** • **[MCP server](https://github.com/veyanet/veya-mcp)** • **[SDK](https://github.com/veyanet/veya-sdk)** • **[Tool reference](references/tools.md)**
@@ -34,7 +34,7 @@ provable:
 
 ### Why a skill?
 
-The VEYA MCP server exposes 54 tools. This skill teaches an agent **when** to use each one,
+The VEYA MCP server exposes 52 tools, or 55 with the Metered Call Guard on (hosted endpoint). This skill teaches an agent **when** to use each one,
 **which arguments** it needs, and **how** to chain them into complete workflows: prove, verify,
 attest, route and audit. The result is correct calls on the first try, clear explanations to the
 user, and safe defaults (read-only first, explicit confirmation before wallet writes).
@@ -143,14 +143,14 @@ Ready files: [`assets/mcp.json`](assets/mcp.json) (hosted) and
 | Proofs and sealed decisions | 6 | Public / key / key + wallet | [proofs.md](references/proofs.md) |
 | On-chain verification | 5 | Public | [verification.md](references/verification.md) |
 | Post-quantum identity | 4 | Public | [identity.md](references/identity.md) |
-| Accounts, environments, agents | 7 | Key (guest: listing) | [workspaces.md](references/workspaces.md) |
+| Accounts, environments, agents | 8 | Key (guest: listing); `veya_tier` also public table | [workspaces.md](references/workspaces.md) |
 | Tool policy and secure routing | 5 | Key | [policy-and-routing.md](references/policy-and-routing.md) |
 | Consensus and protected execution | 5 | Key | [execution.md](references/execution.md) |
 | Agent memory | 4 | Key | [memory.md](references/memory.md) |
 | Public registry | 6 | Public | [registry.md](references/registry.md) |
 | On-chain writes | 5 | Key + wallet | [onchain-writes.md](references/onchain-writes.md) |
 | Metered Call Guard (x402 resource calls) | 3 | Key + wallets | [call-guard.md](references/call-guard.md) |
-| **Total** | **54** | | [tools.md](references/tools.md) |
+| **Total** | **55** (52 without Metered Call Guard) | | [tools.md](references/tools.md) |
 
 ## Network
 
@@ -201,7 +201,7 @@ veya-skills/
 │   ├── registry.md                 # public agents, certificates, executions
 │   ├── onchain-writes.md           # Veya.sol writes, pre-flight, funding
 │   ├── call-guard.md               # x402 resource calls: discover, call, runs
-│   ├── tools.md                    # all 54 tools: args, types, returns, examples
+│   ├── tools.md                    # all 55 tools: args, types, returns, examples
 │   ├── troubleshooting.md          # every server error message and its fix
 │   └── sdk.md                      # @veyanet/sdk for custom logic
 ├── assets/
